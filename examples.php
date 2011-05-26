@@ -1,12 +1,12 @@
 <?php
 
 include './phuggles/phuggles.php';
-	
+    
 $p = new Phuggles();
 
 // Delete beer with id 7
 //print_r( $p->delete_beer(7) );
-	
+    
 /*
 // Get all beers
 print_r( $p->get_beers() );

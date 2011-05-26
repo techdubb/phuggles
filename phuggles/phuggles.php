@@ -11,82 +11,82 @@ include 'request.php';
 
 class Phuggles
 {
-	/**
+    /**
     * Request object
     */
-	private $r;
+    private $r;
 
-	/**
+    /**
     * Constructor
     */
-	function __construct() {
-		$this->r = new Request();
-	}
-	
-	/**
-	* BEERS
-	*/
-	
-	/**
+    function __construct() {
+        $this->r = new Request();
+    }
+    
+    /**
+    * BEERS
+    */
+    
+    /**
     * Get Beers
     */
     function get_beers($params = array()) {
-		return $this->r->get("beers.json", $params);
-	}
-	
-	/**
-	* Get a Beer
+        return $this->r->get("beers.json", $params);
+    }
+    
+    /**
+    * Get a Beer
     */
-	function get_beer($id) {
-		return $this->r->get("beers/" . $id . ".json");
-	}
-	
-	/**
+    function get_beer($id) {
+        return $this->r->get("beers/" . $id . ".json");
+    }
+    
+    /**
     * Create a Beer
     */
-	function create_beer($params) {
-		return $this->r->post("beers.json", $params);
-	}
-	
-	/**
+    function create_beer($params) {
+        return $this->r->post("beers.json", $params);
+    }
+    
+    /**
     * Delete a Beer
     */
-	function delete_beer($id) {
-		return $this->r->delete("beers/" . $id . ".json");
-	}
-	
-	
-	/**
-	* BREWERIES
-	*/
-	
-	/**
+    function delete_beer($id) {
+        return $this->r->delete("beers/" . $id . ".json");
+    }
+    
+    
+    /**
+    * BREWERIES
+    */
+    
+    /**
     * Get Brewery
     */
     function get_breweries($params = array()) {
-		return $this->r->get("breweries.json", $params);
-	}
-	
-	/**
-	* Get a Brewery
+        return $this->r->get("breweries.json", $params);
+    }
+    
+    /**
+    * Get a Brewery
     */
-	function get_brewery($id) {
-		return $this->r->get("breweries/" . $id . ".json");
-	}
-	
-	/**
+    function get_brewery($id) {
+        return $this->r->get("breweries/" . $id . ".json");
+    }
+    
+    /**
     * Create a Brewery
     */
-	function create_brewery($params) {
-		return $this->r->post("breweries.json", $params);
-	}
-	
-	/**
+    function create_brewery($params) {
+        return $this->r->post("breweries.json", $params);
+    }
+    
+    /**
     * Delete a Brewery
     */
-	function delete_brewery($id) {
-		return $this->r->delete("breweries/" . $id . ".json");
-	}
+    function delete_brewery($id) {
+        return $this->r->delete("breweries/" . $id . ".json");
+    }
 }
 
 ?>
