@@ -8,12 +8,14 @@ A PHP library for the [Open Beer Database](https://github.com/tristandunn/openbe
 
 ## Example
 
-    <?php
+~~~ php
+<?php
 
-    require_once "./phuggles/phuggles.php";
+require_once "./phuggles/phuggles.php";
 
-    // Get a beer by ID.
-    print_r(Phuggles\Beer::get(1));
+// Get a beer by ID.
+print_r(Phuggles\Beer::get(1));
+~~~
 
 Checkout `example.php` for more.
 
