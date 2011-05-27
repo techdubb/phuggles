@@ -2,91 +2,88 @@
 
 /**
  * Phuggles is a PHP client that wraps the Open Beer Database API.
- * @author Matthew Hokanson
+ * @author Matthew Hokanson <m@h0ke.com>
  * @version 0.1.0
- * Questions, comments? m@h0ke.com
  */
 
-include 'request.php';
+include "request.php";
 
 class Phuggles
 {
     /**
-    * Request object
-    */
-    private $r;
+     * Request object
+     */
+    private $request;
 
     /**
-    * Constructor
-    */
+     * Constructor
+     */
     function __construct() {
-        $this->r = new Request();
+        $this->request = new Request();
     }
-    
+
     /**
-    * BEERS
-    */
-    
+     * BEERS
+     */
+
     /**
-    * Get Beers
-    */
+     * Get Beers
+     */
     function get_beers($params = array()) {
-        return $this->r->get("beers.json", $params);
+        return $this->request->get("beers.json", $params);
     }
-    
+
     /**
-    * Get a Beer
-    */
+     * Get a Beer
+     */
     function get_beer($id) {
-        return $this->r->get("beers/" . $id . ".json");
+        return $this->request->get("beers/" . $id . ".json");
     }
-    
+
     /**
-    * Create a Beer
-    */
+     * Create a Beer
+     */
     function create_beer($params) {
-        return $this->r->post("beers.json", $params);
+        return $this->request->post("beers.json", $params);
     }
-    
+
     /**
-    * Delete a Beer
-    */
+     * Delete a Beer
+     */
     function delete_beer($id) {
-        return $this->r->delete("beers/" . $id . ".json");
+        return $this->request->delete("beers/" . $id . ".json");
     }
-    
-    
+
+
     /**
-    * BREWERIES
-    */
-    
+     * BREWERIES
+     */
+
     /**
-    * Get Brewery
-    */
+     * Get Brewery
+     */
     function get_breweries($params = array()) {
-        return $this->r->get("breweries.json", $params);
+        return $this->request->get("breweries.json", $params);
     }
-    
+
     /**
-    * Get a Brewery
-    */
+     * Get a Brewery
+     */
     function get_brewery($id) {
-        return $this->r->get("breweries/" . $id . ".json");
+        return $this->request->get("breweries/" . $id . ".json");
     }
-    
+
     /**
-    * Create a Brewery
-    */
+     * Create a Brewery
+     */
     function create_brewery($params) {
-        return $this->r->post("breweries.json", $params);
+        return $this->request->post("breweries.json", $params);
     }
-    
+
     /**
-    * Delete a Brewery
-    */
+     * Delete a Brewery
+     */
     function delete_brewery($id) {
-        return $this->r->delete("breweries/" . $id . ".json");
+        return $this->request->delete("breweries/" . $id . ".json");
     }
 }
-
-?>
