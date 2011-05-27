@@ -1,6 +1,6 @@
 # Phuggles
 
-A PHP library for the [Open Beer Database](https://github.com/tristandunn/openbeerdatabase) API.
+A PHP client for [Open Beer Database](https://github.com/tristandunn/openbeerdatabase).
 
 ## Requirements
 
