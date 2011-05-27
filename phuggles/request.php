@@ -1,69 +1,49 @@
 <?php
 
-class Request
-{
-    /**
-     * Handle GET requests
-     */
-    function get($url, $params = array()) {
-        $params["token"] = PUBLIC_TOKEN;
+namespace Phuggles;
 
-        $query_str   = http_build_query($params);
-        $request_url = API_URL . $url . "?" . $query_str;
+class Request {
+    static public function get($path, $parameters = array()) {
+        $parameters = array_merge($parameters, array("token" => Configuration::$public_token));
+        $path       = $path . "?" . http_build_query($parameters);
 
-        $ch = curl_init();
-        curl_setopt($ch, CURLOPT_URL, $request_url);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-
-        $resp   = curl_exec($ch);
-        $status = curl_getinfo($ch, CURLINFO_HTTP_CODE);
-
-        curl_close($ch);
-
-        return json_decode($resp, true);
+        return self::request($path);
     }
 
-    /**
-     * Handle POST requests
-     */
-    function post($url, $params) {
-        $params["token"] = PRIVATE_TOKEN;
+    static public function post($path, $parameters = array()) {
+        $parameters = array_merge($parameters, array("token" => Configuration::$private_token));
+        $options    = array(
+            CURLOPT_POST       => 1,
+            CURLOPT_POSTFIELDS => http_build_query($parameters)
+        );
 
-        $query_str   = http_build_query($params);
-        $request_url = API_URL . $url;
-
-        $ch = curl_init();
-        curl_setopt($ch, CURLOPT_URL, $request_url);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-        curl_setopt($ch, CURLOPT_POST, 1);
-        curl_setopt($ch, CURLOPT_POSTFIELDS, $query_str);
-
-        $resp = curl_exec($ch);
-
-        curl_close($ch);
-
-        return json_decode($resp, true);
+        return self::request($path, $options);
     }
 
-    /**
-     * Handle DELETE requests
-     */
-    function delete($url) {
-        $params      = array("token" => PRIVATE_TOKEN);
-        $query_str   = http_build_query($params);
-        $request_url = API_URL . $url;
+    static public function delete($path) {
+        $parameters = array("token" => Configuration::$private_token);
+        $options    = array(
+            CURLOPT_POSTFIELDS    => http_build_query($parameters),
+            CURLOPT_CUSTOMREQUEST => "DELETE"
+        );
 
-        $ch = curl_init();
-        curl_setopt($ch, CURLOPT_URL, $request_url);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-        curl_setopt($ch, CURLOPT_POSTFIELDS, $query_str);
-        curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "DELETE");
+        return self::request($path, $options);
+    }
 
-        $resp   = curl_exec($ch);
-        $status = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+    static private function request($path, $options = array()) {
+        $handle = curl_init();
 
-        curl_close($ch);
+        curl_setopt($handle, CURLOPT_URL, Configuration::$host . $path);
+        curl_setopt($handle, CURLOPT_RETURNTRANSFER, 1);
 
-        return json_decode($resp, true);
+        foreach ($options as $key => $value) {
+            curl_setopt($handle, $key, $value);
+        }
+
+        $response = curl_exec($handle);
+
+        curl_close($handle);
+
+        return json_decode($response, true);
     }
 }
