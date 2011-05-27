@@ -7,7 +7,7 @@ class Request {
         $parameters = array_merge($parameters, array("token" => Configuration::$public_token));
         $path       = $path . "?" . http_build_query($parameters);
 
-        return self::request($path);
+        return self::_request($path);
     }
 
     static public function post($path, $parameters = array()) {
@@ -17,7 +17,7 @@ class Request {
             CURLOPT_POSTFIELDS => http_build_query($parameters)
         );
 
-        return self::request($path, $options);
+        return self::_request($path, $options);
     }
 
     static public function delete($path) {
@@ -27,10 +27,10 @@ class Request {
             CURLOPT_CUSTOMREQUEST => "DELETE"
         );
 
-        return self::request($path, $options);
+        return self::_request($path, $options);
     }
 
-    static private function request($path, $options = array()) {
+    static private function _request($path, $options = array()) {
         $handle = curl_init();
 
         curl_setopt($handle, CURLOPT_URL, Configuration::$host . $path);
