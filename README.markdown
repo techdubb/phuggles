@@ -1,6 +1,6 @@
 # Phuggles
 
-A PHP client for [Open Beer Database](https://github.com/tristandunn/openbeerdatabase).
+A PHP client for [Open Beer Database](https://github.com/openbeerdatabase/openbeerdatabase).
 
 ## Requirements
 
